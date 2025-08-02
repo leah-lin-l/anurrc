@@ -1,0 +1,805 @@
+/* General Resets & Variables */
+:root {
+    --bg-dark: #1a1a1a; /* Website's dark background */
+    --text-light: #ffffff; /* Light text color */
+    --accent-orange: #e86a33; /* Accent orange, similar to ANU's red or club logo color */
+    --header-border: #444; /* Thin line color below navigation */
+    --font-heading: 'Montserrat', sans-serif; /* Bold heading font */
+    --font-body: 'Open Sans', sans-serif; /* Body text font */
+    /* Adjust this value based on your actual header's total height in desktop view! */
+    --header-total-height: 81px; /* Estimated: total height of header, including padding and border-bottom */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+a {
+    color: var(--text-light);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--accent-orange);
+}
+
+ul {
+    list-style: none;
+}
+
+/* Header Styling */
+.main-header {
+    background-color: var(--bg-dark);
+    padding: 20px 0;
+    position: relative;
+    z-index: 10;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--header-border);
+    padding-bottom: 20px;
+}
+
+.site-title {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 1.8em; /* Slightly larger to emphasize club name */
+    letter-spacing: 2px; /* Increased letter spacing */
+    color: var(--text-light);
+    text-transform: uppercase;
+    white-space: nowrap; /* Prevent name from wrapping */
+    display: flex; /* Makes the logo and text align horizontally */
+    align-items: center; 
+}
+
+.site-logo {
+    height: 45px; /* Adjust as needed for your logo's size */
+    width: auto; /* Maintain aspect ratio */
+    margin-right: 15px; /* Space between the logo and the "ANURRC" text */
+    vertical-align: middle; /* Helps with vertical alignment if not using flexbox */
+}
+
+/* Navigation */
+.main-nav ul {
+    display: flex;
+    align-items: center;
+}
+
+.main-nav li {
+    margin-left: 30px;
+    position: relative;
+}
+
+.main-nav a {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.9em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    padding: 5px 0; 
+}
+
+.main-nav a.has-dropdown {
+    display: flex;
+    align-items: center;
+}
+
+.dropdown-arrow {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid var(--text-light);
+    margin-left: 8px;
+    transition: border-top-color 0.3s ease;
+}
+
+.main-nav a:hover .dropdown-arrow {
+    border-top-color: var(--accent-orange);
+}
+
+/* Dropdown Menu Styling (Added) */
+.dropdown-menu {
+    display: none; 
+    position: absolute;
+    top: calc(100% + 5px); /* Position right below the parent link */
+    left: 0;
+    min-width: 180px; 
+    background-color: var(--bg-dark); 
+    border: 1px solid var(--header-border); 
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3); 
+    padding: 10px 0; 
+    z-index: 1000; 
+    border-radius: 5px; 
+    opacity: 0; 
+    visibility: hidden; 
+    transform: translateY(-10px); 
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease; 
+}
+
+.dropdown-menu.show {
+    display: block; /* Controlled by JavaScript to show/hide */
+    opacity: 1; 
+    visibility: visible; 
+    transform: translateY(0); /
+}
+
+.dropdown-menu li {
+    margin: 0; /* Reset list item margins */
+}
+
+.dropdown-menu a {
+    padding: 10px 20px; 
+    display: block; 
+    color: var(--text-light);
+    text-transform: none; 
+    font-weight: 400; 
+    white-space: nowrap; 
+}
+
+.dropdown-menu a:hover {
+    background-color: #333; /* Hover background color */
+    color: var(--accent-orange);
+}
+
+/* Hero Section Styling */
+.hero-section {
+    background-color: var(--bg-dark); /* Ensure background is consistent */
+    display: flex;
+    align-items: center; /* Vertically center content */
+    min-height: calc(50vh - var(--header-total-height));
+    padding-bottom: 50px;
+    position: relative;
+}
+
+.hero-text {
+    text-align: left; /* Text aligns to the left as per image */
+    max-width: 900px; /* Constrain width of the text block */
+    padding-top: 40px; 
+}
+
+.hero-text h1 {
+    font-family: var(--font-heading);
+    font-weight: 900;
+    font-size: clamp(2.5em, 6vw, 5em);
+    line-height: 1.1;
+    color: var(--text-light);
+    text-transform: uppercase;
+    margin-bottom: 0;
+}
+
+.hero-text .highlight {
+    color: var(--accent-orange);
+    display: inline;
+}
+
+
+/* Intro Video Section */
+.intro-video-section {
+    background-color: #111; /* Slightly different dark background for contrast */
+    padding: 80px 0;
+    text-align: center;
+}
+
+.intro-video-section h3 {
+    font-family: var(--font-heading);
+    color: var(--text-light);
+    font-size: 2.5em;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+}
+
+.intro-video-section h3::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background-color: var(--accent-orange);
+    margin: 10px auto 0;
+}
+
+.video-container {
+    position: relative; /* Essential for responsive video */
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio (height / width = 9 / 16 = 0.5625) */
+    height: 0;
+    overflow: hidden;
+    margin: 0 auto 30px auto; /* Center the video and add bottom margin */
+    max-width: 900px; /* Max width for the video player */
+    border-radius: 8px; /* Slightly rounded corners for the video iframe */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.video-container iframe {
+    position: absolute; /* Place iframe within container */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0; /* Remove iframe border */
+}
+
+.intro-video-section p {
+    font-size: 1.1em;
+    color: var(--text-light);
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+
+/* Latest News Section Styling */
+.latest-news {
+    background-color: var(--bg-dark); /* Consistent with main background */
+    padding: 5px 0;
+    text-align: center;
+}
+
+.latest-news h3 {
+    font-family: var(--font-heading);
+    color: var(--text-light);
+    font-size: 2.5em;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+}
+.latest-news h3::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background-color: var(--accent-orange); /* Using accent color for separator */
+    margin: 10px auto 0;
+}
+
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.news-item {
+    background-color: #2a2a2a; /* Slightly lighter card background */
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.news-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+.news-item h4 {
+    font-size: 1.4em;
+    margin-top: 0;
+    color: var(--accent-orange); /* Highlight color for news titles */
+    margin-bottom: 10px;
+}
+
+.news-item p {
+    font-size: 1em;
+    color: var(--text-light);
+    margin-bottom: 15px;
+}
+
+.news-item span {
+    font-size: 0.9em;
+    color: #bbb; /* Date color */
+}
+
+/* General Button Style */
+.btn {
+    display: inline-block;
+    background-color: var(--accent-orange); /* Button color */
+    color: var(--bg-dark); /* Button text color for contrast */
+    padding: 12px 25px;
+    border-radius: 5px;
+    margin-top: 50px; /* Top spacing from previous section */
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #d15c2b; /* Button hover color */
+    transform: translateY(-2px);
+    text-decoration: none;
+}
+
+/* Featured Projects Section Styling */
+.featured-projects {
+    background-color: #111; /* Slightly different dark background for contrast */
+    padding: 80px 0;
+    text-align: center;
+}
+
+.featured-projects h3 {
+    font-family: var(--font-heading);
+    color: var(--text-light);
+    font-size: 2.5em;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+}
+
+.featured-projects h3::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background-color: var(--accent-orange);
+    margin: 10px auto 0;
+}
+
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.project-card {
+    background-color: #2a2a2a; /* Card background color */
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    overflow: hidden;
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+.project-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+}
+
+.project-card h4 {
+    padding: 15px;
+    margin-bottom: 0;
+    font-size: 1.5em;
+    color: var(--accent-orange); /* Highlight color for project titles */
+}
+
+.project-card p {
+    padding: 0 15px 15px;
+    color: var(--text-light);
+    font-size: 0.95em;
+}
+
+.project-card .read-more {
+    display: block;
+    padding: 10px 15px;
+    background-color: #3e3e3e; /* Darker background for 'Read More' link */
+    color: var(--text-light);
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    font-weight: 600;
+}
+
+.project-card .read-more:hover {
+    background-color: var(--accent-orange);
+    color: var(--bg-dark); /* Text color changes on hover */
+}
+
+/* Upcoming Events Section Styling */
+.upcoming-events {
+    background-color: var(--bg-dark); /* Consistent background */
+    padding: 80px 0;
+    text-align: center;
+}
+
+.upcoming-events h3 {
+    font-family: var(--font-heading);
+    color: var(--text-light);
+    font-size: 2.5em;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+}
+
+.upcoming-events h3::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background-color: var(--accent-orange);
+    margin: 10px auto 0;
+}
+
+.event-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Increased gap for better separation */
+    max-width: 800px;
+    margin: 40px auto 0;
+}
+
+.event-item {
+    background-color: #2a2a2a; /* Event card background */
+    padding: 25px 35px; /* More padding */
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15); /* Stronger shadow */
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.event-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.25);
+}
+
+.event-item h4 {
+    margin: 0;
+    font-size: 1.4em;
+    color: var(--accent-orange);
+    margin-bottom: 5px; /* Spacing for description */
+}
+
+.event-item p {
+    margin: 0;
+    color: var(--text-light);
+    font-size: 1em;
+}
+
+.event-item .read-more {
+    color: var(--accent-orange);
+    white-space: nowrap;
+    font-weight: 600;
+    text-decoration: none; /* No underline by default */
+}
+
+.event-item .read-more:hover {
+    text-decoration: underline; /* Underline on hover */
+}
+
+
+/* Footer Styling */
+/* Footer Styling */
+footer {
+    background-color: var(--bg-dark); /* Fallback background color */
+    color: var(--text-light);
+    padding: 90px 0; /* Standard padding for footer content */
+    text-align: center;
+    position: relative; /* Needed for positioning the background image/overlay */
+
+    /* *** Background Image Banner Styles *** */
+    background-image: url('Images/banner.png'); /* Replace with your image path */
+    background-size: 45%; /* Ensures the image covers the entire footer area */
+    background-position: right; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents image repetition */
+}
+
+.footer-background-overlay {
+    position: absolute; /* Position over the background image */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent dark overlay (adjust opacity as needed) */
+    z-index: 1; /* Ensures the overlay is above the background image */
+}
+
+/* Ensure footer content is above the overlay */
+footer .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+/* Existing footer-links, social-media, p styles */
+.footer-links ul {
+    display: flex;
+    flex-wrap: wrap; /* Allow links to wrap on smaller screens */
+    justify-content: center; /* Center the links */
+    gap: 15px; /* Space between links */
+    margin-bottom: 10px; /* Space below links */
+    margin-top: 15px;
+}
+
+.footer-links a {
+    color: var(--text-light);
+    text-decoration: none;
+    font-size: 0.95em;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: var(--accent-orange);
+}
+
+.social-media {
+    margin-top: 10px; /* Space above social icons */
+    margin-bottom: 20px; /* Space below social icons */
+}
+
+.social-media a {
+    color: var(--text-light);
+    font-size: 1.8em;
+    margin: 0 10px;
+    transition: color 0.3s ease;
+}
+
+.social-media a:hover {
+    color: var(--accent-orange);
+}
+
+footer p {
+    font-size: 0.85em;
+    color: #ccc;
+    margin-top: 15px; /* Space above copyright text */
+    line-height: 1.5;
+}
+
+/* --- New Sections CSS --- */
+
+/* Activities Section */
+.activities-section {
+    background-color: var(--bg-dark); /* Consistent dark background */
+    padding: 80px 0; /* Standard section padding */
+    text-align: center;
+}
+
+.activities-section h3 {
+    font-family: var(--font-heading);
+    color: var(--text-light);
+    font-size: 2.5em;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+}
+
+.activities-section h3::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background-color: var(--accent-orange);
+    margin: 10px auto 0;
+}
+
+.activities-content {
+    display: flex; /* Arrange categories side-by-side */
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    justify-content: center;
+    gap: 10px; /* Space between activity categories */
+    margin-top: 40px;
+}
+
+.activity-category {
+    background-color: #2a2a2a; /* Slightly lighter background for cards */
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    flex: 1; /* Allow items to grow */
+    min-width: 300px; /* Minimum width before wrapping */
+    max-width: 45%; /* Max width for two columns */
+    text-align: left;
+}
+
+.activity-category h4 {
+    font-family: var(--font-heading);
+    font-size: 1.8em;
+    color: var(--accent-orange);
+    margin-bottom: 20px;
+    text-align: center; /* Center category titles */
+}
+
+.activity-category ul {
+    list-style: none; /* Remove default list bullets */
+    padding: 0;
+    margin: 0;
+}
+
+.activity-category li {
+    background-color: #333; /* Slightly different background for list items */
+    margin-bottom: 10px; /* Space between list items */
+    padding: 12px 15px;
+    border-radius: 5px;
+    font-size: 1em;
+    color: var(--text-light);
+    line-height: 1.4;
+    display: flex;
+    text-align: left;
+    /*align-items: center;  Align text vertically */
+    display: block;
+}
+
+
+.activity-category li:last-child {
+    margin-bottom: 0; /* No margin after last item */
+}
+
+.activity-category li strong {
+    color: var(--accent-orange); /* Highlight keywords */
+    margin-right: 8px;
+    white-space: nowrap; 
+}
+
+
+/* Activities Section - Poster Grid */
+.activity-posters-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid for posters */
+    gap: 30px; /* Space between posters */
+    margin-top: 60px; /* Space above the posters grid */
+    padding: 0 20px; /* Some horizontal padding to prevent stretching too wide on very large screens */
+    max-width: 1200px; /* Align with your container width */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.poster-item {
+    background-color: #2a2a2a; /* Optional: subtle background for poster card */
+    border-radius: 8px;
+    overflow: hidden; /* Ensures image corners match card corners */
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex; /* Helps center image if it's smaller than item */
+    justify-content: center;
+    align-items: center;
+}
+
+.poster-item:hover {
+    transform: translateY(-8px) scale(1.5); /* Lift effect on hover */
+    box-shadow: 0 12px 25px rgba(0,0,0,0.4);
+
+}
+
+.poster-image {
+    width: 100%; /* Make image fill its container */
+    height: auto; /* Maintain aspect ratio */
+    display: block; /* Remove extra space below image */
+}
+
+/* Responsive Adjustments for Posters */
+@media (max-width: 768px) {
+    .activity-posters-grid {
+        grid-template-columns: 1fr; /* Stack posters vertically on mobile */
+        gap: 20px;
+        margin-top: 40px;
+    }
+}
+
+/* Ensure the .container padding doesn't push posters too much */
+@media (max-width: 768px) {
+    .activities-section .container {
+        padding: 0 15px; /* Adjust container padding for mobile if needed to avoid double padding */
+    }
+}
+
+
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        align-items: flex-start;
+        padding-bottom: 15px;
+    }
+
+    .main-nav ul {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-top: 20px;
+        width: 100%;
+        border-top: 1px solid var(--header-border);
+        padding-top: 15px;
+    }
+
+    .main-nav li {
+        margin: 10px 0;
+    }
+
+    .site-logo {
+        height: 30px; /* Smaller logo on mobile */
+        margin-right: 10px;
+    }
+
+    .site-title {
+        font-size: 1.5em;
+    }
+
+    /* Adjust hero section min-height for mobile header */
+    .hero-section {
+        min-height: calc(100vh - var(--header-total-height) - 70px); /* Adjust based on actual mobile header height */
+        padding-top: 30px; /* Ensure content isn't too close to header on small screens */
+    }
+
+    .hero-text h1 {
+        font-size: clamp(2em, 8vw, 4em);
+        text-align: center;
+    }
+
+    .hero-text {
+        text-align: center;
+    }
+
+      .intro-video-section {
+        padding: 50px 0; /* Adjust padding for mobile */
+    }
+
+    .intro-video-section h3 {
+        font-size: 2em; /* Smaller heading on mobile */
+    }
+
+    .video-container {
+        padding-bottom: 70%; /* Adjust aspect ratio for better mobile viewing (e.g., 4:3) or keep 56.25% */
+        max-width: 80%; /* Ensure video takes full width */
+    }
+
+    .news-grid, .project-grid {
+        grid-template-columns: 1fr; /* Stack items on small screens */
+    }
+
+    .event-item {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px; /* Adjust padding for smaller screens */
+    }
+
+    .event-item h4 {
+        margin-bottom: 5px;
+    }
+
+    .event-item .read-more {
+        margin-top: 10px; /* Add space below description */
+    }
+
+    .btn {
+        margin-top: 30px; /* Adjust button margin for mobile */
+        padding: 10px 20px;
+    }
+
+     footer {
+        padding: 30px 0;
+    }
+
+    .footer-links ul {
+        flex-direction: column; /* Stack links vertically on mobile */
+        gap: 10px;
+    }
+
+    .social-media a {
+        font-size: 1.5em;
+        margin: 0 8px;
+    }
+
+    .activities-content {
+        flex-direction: column; /* Stack categories vertically */
+        gap: 30px;
+    }
+
+    .activity-category {
+        max-width: 100%; /* Take full width on small screens */
+    }
+}
