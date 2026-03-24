@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ANU RRC × UC Robo — BattleBots 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --dark: #111111;
+    --card: #1a1a1a;
+    --accent: #ff4d00;
+    --accent2: #ffb800;
+    --white: #f5f5f5;
+    --muted: #888888;
+    --border: #2a2a2a;
+    --danger: #ff2244;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent) var(--dark);
+  }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  /* ===== NAV ===== */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-brand {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .nav-brand span { color: var(--white); }
+  .nav-brand .x { color: var(--muted); font-size: 1rem; }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+
+  .nav-cta {
+    background: var(--accent);
+    color: var(--black) !important;
+    padding: 0.5rem 1.2rem;
+    border-radius: 4px;
+    font-weight: 700 !important;
+  }
+
+  .nav-cta:hover { background: var(--accent2) !important; color: var(--black) !important; }
+
+  /* ===== HERO ===== */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    padding: 6rem 2rem 4rem;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 30% 40%, rgba(255,77,0,0.15), transparent 60%),
+      radial-gradient(ellipse at 70% 60%, rgba(255,184,0,0.08), transparent 50%);
+    z-index: 0;
+  }
+
+  .hero-image-bg {
+    position: absolute;
+    inset: 0;
+    background: url('/mnt/user-data/uploads/微信图片_20260315161034_155_166.jpg') center/cover no-repeat;
+    opacity: 0.12;
+    filter: saturate(0.3) contrast(1.2);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255,77,0,0.1);
+    border: 1px solid rgba(255,77,0,0.3);
+    padding: 0.4rem 1rem;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    animation: fadeIn 0.8s ease;
+  }
+
+  .hero-badge .dot {
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(4rem, 12vw, 10rem);
+    line-height: 0.9;
+    letter-spacing: -2px;
+    margin-bottom: 1.5rem;
+    animation: slideUp 0.8s ease;
+  }
+
+  .hero h1 .line1 { color: var(--white); display: block; }
+  .hero h1 .line2 {
+    display: block;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-sub {
+    font-size: 1.15rem;
+    color: var(--muted);
+    max-width: 600px;
+    margin: 0 auto 2.5rem;
+    animation: fadeIn 1s ease 0.3s both;
+  }
+
+  .hero-meta {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+    margin-bottom: 2.5rem;
+    animation: fadeIn 1s ease 0.5s both;
+  }
+
+  .hero-meta-item {
+    text-align: center;
+  }
+
+  .hero-meta-item .label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--muted);
+    margin-bottom: 0.25rem;
+  }
+
+  .hero-meta-item .value {
+    font-family: 'Space Mono', monospace;
+    font-size: 1rem;
+    color: var(--white);
+    font-weight: 700;
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fadeIn 1s ease 0.7s both;
+  }
+
+  .btn {
+    padding: 0.85rem 2rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s;
+    cursor: pointer;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: var(--black);
+  }
+
+  .btn-primary:hover {
+    background: var(--accent2);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(255,77,0,0.3);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--white);
+    border: 1px solid var(--border);
+  }
+
+  .btn-outline:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  .hero-orgs {
+    margin-top: 3rem;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    align-items: center;
+    animation: fadeIn 1s ease 0.9s both;
+  }
+
+  .hero-orgs span {
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  .hero-orgs .org-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.3rem;
+    letter-spacing: 2px;
+    color: var(--white);
+  }
+
+  @keyframes slideUp {
+    from { transform: translateY(40px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  /* ===== SECTIONS ===== */
+  section {
+    padding: 6rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    letter-spacing: 1px;
+    margin-bottom: 1rem;
+    line-height: 1;
+  }
+
+  .section-desc {
+    color: var(--muted);
+    max-width: 600px;
+    margin-bottom: 3rem;
+    font-size: 1rem;
+  }
+
+  /* ===== DIVIDER ===== */
+  .divider {
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ===== ABOUT ===== */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .about-text p {
+    color: var(--muted);
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    line-height: 1.8;
+  }
+
+  .stat-row {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .stat {
+    text-align: center;
+  }
+
+  .stat .num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3rem;
+    color: var(--accent);
+    line-height: 1;
+  }
+
+  .stat .txt {
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .about-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .about-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: border-color 0.3s;
+  }
+
+  .about-card:hover { border-color: var(--accent); }
+
+  .about-card h4 {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+    color: var(--accent2);
+  }
+
+  .about-card p {
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  /* ===== TIMELINE ===== */
+  .timeline {
+    position: relative;
+    padding-left: 2rem;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 0; bottom: 0;
+    width: 2px;
+    background: var(--border);
+  }
+
+  .tl-item {
+    position: relative;
+    margin-bottom: 2.5rem;
+    padding-left: 2rem;
+  }
+
+  .tl-item::before {
+    content: '';
+    position: absolute;
+    left: -2rem;
+    top: 6px;
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background: var(--dark);
+    border: 2px solid var(--accent);
+    z-index: 1;
+  }
+
+  .tl-item.active::before {
+    background: var(--accent);
+    box-shadow: 0 0 12px rgba(255,77,0,0.5);
+  }
+
+  .tl-item.past::before {
+    background: var(--muted);
+    border-color: var(--muted);
+  }
+
+  .tl-date {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--accent);
+    margin-bottom: 0.25rem;
+  }
+
+  .tl-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+    margin-bottom: 0.25rem;
+  }
+
+  .tl-desc {
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  .tl-tag {
+    display: inline-block;
+    background: rgba(255,77,0,0.15);
+    color: var(--accent);
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    margin-top: 0.5rem;
+  }
+
+  .tl-tag.main {
+    background: rgba(255,184,0,0.15);
+    color: var(--accent2);
+  }
+
+  /* ===== RULES ===== */
+  .rules-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .rule-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .rule-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+  }
+
+  .rule-card .icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .rule-card h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+  }
+
+  .rule-card p {
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  .rule-card.danger {
+    border-color: rgba(255,34,68,0.3);
+  }
+
+  .rule-card.danger:hover {
+    border-color: var(--danger);
+  }
+
+  .rule-card.danger h3 {
+    color: var(--danger);
+  }
+
+  /* ===== ROBOT TYPES ===== */
+  .types-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .type-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s;
+  }
+
+  .type-card:hover {
+    border-color: var(--accent2);
+    transform: translateY(-4px);
+  }
+
+  .type-card .type-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+
+  .type-card h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+  }
+
+  .type-card p {
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+
+  /* ===== MATCH ===== */
+  .match-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .match-stat {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+  }
+
+  .match-stat .big {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3rem;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 0.25rem;
+  }
+
+  .match-stat .sub {
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .win-methods {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .win-method {
+    flex: 1;
+    min-width: 180px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+  }
+
+  .win-method h4 {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--accent2);
+    margin-bottom: 0.5rem;
+  }
+
+  .win-method p {
+    color: var(--muted);
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+
+  /* ===== PRICING ===== */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .price-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2.5rem 2rem;
+    position: relative;
+    transition: all 0.3s;
+  }
+
+  .price-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+  }
+
+  .price-card.featured {
+    border-color: var(--accent);
+    background: linear-gradient(180deg, rgba(255,77,0,0.08), var(--card));
+  }
+
+  .price-card .tag {
+    position: absolute;
+    top: -12px;
+    right: 1.5rem;
+    background: var(--accent);
+    color: var(--black);
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 0.3rem 0.8rem;
+    border-radius: 4px;
+  }
+
+  .price-card h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+  }
+
+  .price-card .price-desc {
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+  }
+
+  .price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .price-row:last-child { border-bottom: none; }
+
+  .price-row .label {
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+
+  .price-row .amount {
+    font-family: 'Space Mono', monospace;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--white);
+  }
+
+  .price-note {
+    margin-top: 1.5rem;
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  /* ===== SAFETY ===== */
+  .safety-banner {
+    background: linear-gradient(135deg, rgba(255,34,68,0.1), rgba(255,77,0,0.05));
+    border: 1px solid rgba(255,34,68,0.3);
+    border-radius: 16px;
+    padding: 3rem;
+    margin-top: 2rem;
+  }
+
+  .safety-banner h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    color: var(--danger);
+    margin-bottom: 1rem;
+  }
+
+  .safety-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 0.75rem;
+  }
+
+  .safety-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .safety-list li .warn { color: var(--danger); font-size: 1.1rem; flex-shrink: 0; }
+
+  /* ===== CTA ===== */
+  .cta-section {
+    text-align: center;
+    padding: 6rem 2rem;
+    position: relative;
+  }
+
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, rgba(255,77,0,0.08), transparent 70%);
+  }
+
+  .cta-section > * { position: relative; z-index: 1; }
+
+  .cta-section h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3rem, 6vw, 5rem);
+    margin-bottom: 1rem;
+  }
+
+  .cta-section p {
+    color: var(--muted);
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+  }
+
+  .cta-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-top: 3rem;
+  }
+
+  .cta-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .cta-links a:hover { color: var(--accent); }
+
+  /* ===== FOOTER ===== */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+
+  footer a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .about-grid { grid-template-columns: 1fr; }
+    .hero-meta { gap: 1.5rem; }
+    .stat-row { flex-wrap: wrap; }
+    section { padding: 4rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">
+    ANU RRC <span class="x">×</span> <span>UC ROBO</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#timeline">Timeline</a></li>
+    <li><a href="#rules">Rules</a></li>
+    <li><a href="#types">Robot Types</a></li>
+    <li><a href="#match">Match</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="https://campus.hellorubric.com/?tab=memberships&s=11136" class="nav-cta" target="_blank">Register →</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-image-bg"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="dot"></span>
+      Registrations Open — Semester 1, 2026
+    </div>
+    <h1>
+      <span class="line1">CANBERRA</span>
+      <span class="line2">BATTLEBOTS 2026</span>
+    </h1>
+    <p class="hero-sub">
+      Design. Build. Destroy. Canberra's premier university combat robotics competition — 150g antweight class. Organised by ANU RRC &amp; UC Robo in partnership with Canberra Combat Robotics.
+    </p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <div class="label">Weight Class</div>
+        <div class="value">150g / Antweight</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="label">Exhibition</div>
+        <div class="value">Early April 2026</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="label">Main Competition</div>
+        <div class="value">Late September 2026</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="label">Arena</div>
+        <div class="value">Polycarbonate Enclosure</div>
+      </div>
+    </div>
+    <div class="hero-buttons">
+      <a href="https://campus.hellorubric.com/?tab=memberships&s=11136" class="btn btn-primary" target="_blank">Register on Rubric →</a>
+      <a href="#rules" class="btn btn-outline">Read the Rules</a>
+    </div>
+    <div class="hero-orgs">
+      <div class="org-name">ANU RRC</div>
+      <span>×</span>
+      <div class="org-name">UC ROBO</div>
+      <span>with</span>
+      <div class="org-name">CCR</div>
+    </div>
+  </div>
+</header>
+
+<!-- ABOUT -->
+<div class="divider"></div>
+<section id="about">
+  <div class="section-label">// About the Event</div>
+  <div class="section-title">What is BattleBots?</div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>
+        BattleBots is a combat robotics competition where university students design, build, and fight 150-gram antweight robots in a polycarbonate arena. Robots compete head-to-head in 3-minute matches, with wins by knockout, pit-out, or judges' decision.
+      </p>
+      <p>
+        Co-organised by the <strong>ANU Robotics &amp; RC Club</strong> and <strong>UC Robo</strong> at University of Canberra, in partnership with the <strong>Canberra Combat Robotics Group (CCR)</strong>, this event is open to students of all experience levels. Kits are available for beginners, and workshops will guide you from design to competition day.
+      </p>
+      <p>
+        The competition follows the <strong>SPARC Robot Construction Specifications v1.5</strong> adapted by CCR for Canberra events, with matches governed by <strong>SPARC Match Rules v1.2</strong>.
+      </p>
+      <div class="stat-row">
+        <div class="stat">
+          <div class="num">150g</div>
+          <div class="txt">Weight Limit</div>
+        </div>
+        <div class="stat">
+          <div class="num">3 min</div>
+          <div class="txt">Match Length</div>
+        </div>
+        <div class="stat">
+          <div class="num">2</div>
+          <div class="txt">Events</div>
+        </div>
+        <div class="stat">
+          <div class="num">∞</div>
+          <div class="txt">Destruction</div>
+        </div>
+      </div>
+    </div>
+    <div class="about-cards">
+      <div class="about-card">
+        <h4>🔧 Workshops Provided</h4>
+        <p>Design workshops, 3D printing sessions, and hands-on build days at UC Workshop 7. We'll help you go from idea to fighting robot.</p>
+      </div>
+      <div class="about-card">
+        <h4>📦 Starter Kits Available</h4>
+        <p>Don't know where to start? Purchase a kit with motors, electronics, receiver and optional transmitter. Just design your chassis and weapon.</p>
+      </div>
+      <div class="about-card">
+        <h4>🏟️ Professional Arena</h4>
+        <p>Fights take place in a polycarbonate enclosed arena with pit drops in two corners. Spectator-friendly and safe.</p>
+      </div>
+      <div class="about-card">
+        <h4>🎓 Open to All Students</h4>
+        <p>ANU and UC students welcome. No prior robotics experience required — just enthusiasm and a willingness to learn (and break things).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<div class="divider"></div>
+<section id="timeline">
+  <div class="section-label">// Schedule</div>
+  <div class="section-title">Event Timeline</div>
+  <div class="section-desc">From first designs to competition day — here's the roadmap for BattleBots 2026.</div>
+  <div class="timeline">
+    <div class="tl-item past">
+      <div class="tl-date">October 2025</div>
+      <div class="tl-title">Information Night</div>
+      <div class="tl-desc">Overview of the competition, early formation of teams, guest speakers from CCR and UC Collaborative Robotics Lab.</div>
+    </div>
+    <div class="tl-item past">
+      <div class="tl-date">November 2025</div>
+      <div class="tl-title">BattleBots Meet</div>
+      <div class="tl-desc">Final formation of teams, sign-ups, and handout of kits.</div>
+    </div>
+    <div class="tl-item past">
+      <div class="tl-date">Dec 2025 – Jan 2026</div>
+      <div class="tl-title">Holiday Design Phase</div>
+      <div class="tl-desc">Teams get together and start early talks, sketches, and CAD designs over the break.</div>
+    </div>
+    <div class="tl-item active">
+      <div class="tl-date">February – March 2026</div>
+      <div class="tl-title">Design Workshops &amp; Production</div>
+      <div class="tl-desc">Workshop sessions at UC Workshop 7. 3D printing, materials guidance, and build days. Kit cutoff date: March 8th.</div>
+
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">Late March 2026</div>
+      <div class="tl-title">Preparation &amp; Testing</div>
+      <div class="tl-desc">Final testing, safety checks, and getting ready for the exhibition match.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">Early April 2026</div>
+      <div class="tl-title">Exhibition Match</div>
+      <div class="tl-desc">A showcase event — test your robot in friendly bouts, get feedback, and prepare for the main competition.</div>
+      <span class="tl-tag">Exhibition</span>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">Term 2 Mid-Term Break</div>
+      <div class="tl-title">Design Iteration &amp; Rebuild</div>
+      <div class="tl-desc">Take lessons from the exhibition, redesign, upgrade, and prepare your robot for the real thing.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">Late September 2026</div>
+      <div class="tl-title">Main Competition Day</div>
+      <div class="tl-desc">The official BattleBots 2026 tournament. Double elimination bracket. Trophies awarded. Location TBA.</div>
+      <span class="tl-tag main">Main Event</span>
+    </div>
+  </div>
+</section>
+
+<!-- RULES -->
+<div class="divider"></div>
+<section id="rules">
+  <div class="section-label">// Construction Rules</div>
+  <div class="section-title">Robot Specifications</div>
+  <div class="section-desc">Based on SPARC Robot Construction Specifications v1.5, adapted by the Canberra Combat Robotics Group.</div>
+  <div class="rules-grid">
+    <div class="rule-card">
+      <div class="icon">⚖️</div>
+      <h3>Weight Class</h3>
+      <p>Standard antweight: <strong>150g (0.33 lb)</strong>. Shufflers get a 1.25× bonus (225g). Walkers get a 2× bonus (300g). Your robot must weigh in at or under the limit at competition.</p>
+    </div>
+    <div class="rule-card">
+      <div class="icon">🔋</div>
+      <h3>Power &amp; Batteries</h3>
+      <p>Only non-spillable batteries permitted (LiPo, NiMh, LiFe, etc.). Voltages above 48V require prior approval. A manual disconnect must be accessible within 15 seconds. A visible power LED is <strong>required</strong>.</p>
+    </div>
+    <div class="rule-card">
+      <div class="icon">📡</div>
+      <h3>Radio Control</h3>
+      <p>2.4GHz spread-spectrum systems required. Must have failsafe that stops all motion on signal loss. At least 2 frequency channels required. Toy radios may be allowed for antweights without active weapons.</p>
+    </div>
+    <div class="rule-card">
+      <div class="icon">🔒</div>
+      <h3>Safety Requirements</h3>
+      <p>Weapon locks must be clearly visible at all times outside the arena (e.g. "remove before flight" tags). Full deactivation within 60 seconds by manual disconnect. Wheels must be off-ground when not in arena.</p>
+    </div>
+    <div class="rule-card">
+      <div class="icon">🛠️</div>
+      <h3>Materials</h3>
+      <p>Any materials allowed for standard class. Suggested: 3D printed (TPU, Nylon, CF-PLA+), composites (carbon fibre, Kevlar), metals (aluminium, mild steel). Design for easy repair.</p>
+    </div>
+    <div class="rule-card">
+      <div class="icon">🌀</div>
+      <h3>Spinning Weapons</h3>
+      <p>Rotational weapons allowed. Must stop within 60 seconds of power removal with self-contained braking. Weapons that contact arena outer walls need pre-approval.</p>
+    </div>
+    <div class="rule-card danger">
+      <div class="icon">🚫</div>
+      <h3>Forbidden Weapons</h3>
+      <p>No electrical weapons, RF jamming, entangling devices (nets, tapes, strings), liquid weapons, projectiles, fire/heat, explosives, smoke, bright lasers, or hazardous materials. Internal combustion engines are not permitted.</p>
+    </div>
+    <div class="rule-card danger">
+      <div class="icon">⚠️</div>
+      <h3>Not Allowed at This Event</h3>
+      <p>Tethered projectiles, heat/fire weapons, smoke effects, pneumatics (without prior organiser approval), and ICE engines are all prohibited at CCR events.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ROBOT TYPES -->
+<div class="divider"></div>
+<section id="types">
+  <div class="section-label">// Design Inspiration</div>
+  <div class="section-title">Common Robot Types</div>
+  <div class="section-desc">Not sure what to build? Here are the main archetypes in antweight combat.</div>
+  <div class="types-grid">
+    <div class="type-card">
+      <div class="type-icon">🌀</div>
+      <h3>Spinner</h3>
+      <p>Vertical, horizontal, or drum spinners. High damage output. Can be vertical disc, horizontal bar, or compact drum.</p>
+    </div>
+    <div class="type-card">
+      <div class="type-icon">⬆️</div>
+      <h3>Flipper</h3>
+      <p>Uses a mechanical arm to flip opponents over. Pancake-style flippers are popular at antweight. Great control-focused design.</p>
+    </div>
+    <div class="type-card">
+      <div class="type-icon">🔺</div>
+      <h3>Wedge / Pusher</h3>
+      <p>Low-profile wedge that gets under opponents. Simple, durable, and effective. The classic "door stopper 2.0" approach.</p>
+    </div>
+    <div class="type-card">
+      <div class="type-icon">🔨</div>
+      <h3>Hammer / Axe</h3>
+      <p>Overhead striking weapon. Dramatic and crowd-pleasing. Requires careful weight distribution at 150g.</p>
+    </div>
+    <div class="type-card">
+      <div class="type-icon">🦀</div>
+      <h3>Grabber / Lifter</h3>
+      <p>Clamps onto opponents and controls their movement. Push them into pits or pin them against walls.</p>
+    </div>
+    <div class="type-card">
+      <div class="type-icon">🚶</div>
+      <h3>Walker (300g bonus)</h3>
+      <p>Non-wheeled locomotion allows double the weight at 300g. Complex but rewarding if you can pull it off.</p>
+    </div>
+  </div>
+</section>
+
+<!-- MATCH PROCEDURES -->
+<div class="divider"></div>
+<section id="match">
+  <div class="section-label">// Match Day</div>
+  <div class="section-title">How Matches Work</div>
+  <div class="section-desc">Based on SPARC Match Rules v1.2, adapted by CCR.</div>
+  <div class="match-info">
+    <div class="match-stat">
+      <div class="big">3:00</div>
+      <div class="sub">Match Length</div>
+    </div>
+    <div class="match-stat">
+      <div class="big">10s</div>
+      <div class="sub">KO Countdown</div>
+    </div>
+    <div class="match-stat">
+      <div class="big">10s</div>
+      <div class="sub">Max Pin Time</div>
+    </div>
+    <div class="match-stat">
+      <div class="big">20 min</div>
+      <div class="sub">Min Between Matches</div>
+    </div>
+  </div>
+  <div class="win-methods">
+    <div class="win-method">
+      <h4>💀 Knockout (KO)</h4>
+      <p>If a robot can't demonstrate controlled translational movement within a 10-second countdown, it loses. Attacking a "dead" robot resets the count.</p>
+    </div>
+    <div class="win-method">
+      <h4>🕳️ Pit-Out</h4>
+      <p>The arena has pit drops in two corners. Pits open with 1 minute remaining. Push your opponent in to win instantly.</p>
+    </div>
+    <div class="win-method">
+      <h4>⚖️ Judges' Decision</h4>
+      <p>If both robots survive to the buzzer, judges score on damage, aggression, and control to determine the winner.</p>
+    </div>
+    <div class="win-method">
+      <h4>🏳️ Tap Out</h4>
+      <p>A driver can concede at any time by informing the referee verbally or pressing the tap-out button.</p>
+    </div>
+  </div>
+  <div style="margin-top: 2rem;">
+    <p style="color: var(--muted); font-size: 0.9rem;">
+      <strong style="color: var(--white);">Tournament Format:</strong> Round Robin for 5 or fewer robots; Double Elimination for 6+. Modified single un-stick rule applies — you get one free un-stick only if the opponent didn't cause it.
+    </p>
+  </div>
+</section>
+
+<!-- PRICING -->
+<div class="divider"></div>
+<section id="pricing">
+  <div class="section-label">// Registration &amp; Kits</div>
+  <div class="section-title">Pricing</div>
+  <div class="section-desc">Competition entry, robot kits (with or without transmitter), and event merch are all available on our Rubric page. Club members get discounted pricing on everything.</div>
+  <div style="text-align: center; margin-top: 2rem;">
+    <a href="https://campus.hellorubric.com/?tab=merchandise&s=11136" class="btn btn-primary" target="_blank" style="font-size: 1.1rem; padding: 1.1rem 3rem;">Check Pricing on Rubric →</a>
+    <p style="color: var(--muted); font-size: 0.85rem; margin-top: 1.5rem;">Entry fees, kits, and t-shirts — all in one place. Club membership gives you access to discounted rates and workshop sessions.</p>
+  </div>
+</section>
+
+<!-- SAFETY -->
+<div class="divider"></div>
+<section id="safety">
+  <div class="section-label">// Safety First</div>
+  <div class="section-title">Safety Requirements</div>
+  <div class="section-desc">Combat robotics is inherently dangerous. All participants build and operate robots at their own risk.</div>
+  <div class="safety-banner">
+    <h3>⚠️ Cardinal Safety Rules</h3>
+    <ul class="safety-list">
+      <li><span class="warn">✕</span> DO NOT spin up weapons outside the arena — ever.</li>
+      <li><span class="warn">✕</span> Weapon locks must be clearly visible at all times when not in the arena (use "remove before flight" tags or similar).</li>
+      <li><span class="warn">✕</span> Robots must be fully deactivated within 60 seconds by manual disconnect.</li>
+      <li><span class="warn">✕</span> Wheels must be off the ground when the robot is not in the arena or official testing area.</li>
+      <li><span class="warn">✕</span> A visible power LED is mandatory on all robots.</li>
+      <li><span class="warn">✕</span> All robots must pass the safety inspection before entering any match.</li>
+      <li><span class="warn">✕</span> When testing drive systems, weapon lock must be engaged and wheels off the ground.</li>
+      <li><span class="warn">✕</span> Weapon locking pins must be in place when weapon power is applied during power-on procedure.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="divider"></div>
+<div class="cta-section">
+  <div class="section-label">// Get Started</div>
+  <h2>Ready to Build?</h2>
+  <p>Join ANU RRC or UC Robo, grab a kit, and start designing your 150g fighting machine.</p>
+  <div class="hero-buttons">
+    <a href="https://campus.hellorubric.com/?tab=memberships&s=11136" class="btn btn-primary" target="_blank">Join ANU RRC on Rubric →</a>
+    <a href="https://discord.gg/wuSrebdv" class="btn btn-outline" target="_blank">Join Discord</a>
+  </div>
+  <div class="cta-links">
+    <a href="https://anurrc.com/" target="_blank">🌐 anurrc.com</a>
+    <a href="https://www.instagram.com/anu.rrc" target="_blank">📸 @anu.rrc</a>
+    <a href="mailto:clubroboticsrc@gmail.com">✉️ clubroboticsrc@gmail.com</a>
+    <a href="https://www.facebook.com/share/1J1vaYUWKD/" target="_blank">📘 Facebook</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>ANU Robotics &amp; RC Club × UC Robo — BattleBots 2026 &nbsp;|&nbsp; Rules based on <a href="#">SPARC v1.5</a> &amp; <a href="#">CCR Match Procedures</a> &nbsp;|&nbsp; <a href="https://anurrc.com/" target="_blank">anurrc.com</a></p>
+</footer>
+
+</body>
+</html>
